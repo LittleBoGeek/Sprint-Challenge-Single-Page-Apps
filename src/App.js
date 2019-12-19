@@ -1,14 +1,28 @@
-import React from "react";
-import TabNav from "./components/TabNav.js";
+import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import Header from "./components/Header.js";
-import AppRouter from "./components/AppRouter.js";
+import CharacterList from "./components/CharacterList";
+import CharacterCard from "./components/CharacterCard";
+import WelcomePage from "./components/WelcomePage";
+
+//import "./App.css";
 
 export default function App() {
+  // TODO: add routes 
+
   return (
     <main>
       <Header />
-      <TabNav />
-      <AppRouter />
+      <Route exact path="/" component={WelcomePage} />
+      <Route
+        exact
+        path="/character-list/"
+        render={props => <CharacterList {...props} />}
+      />
+      <Route
+        path="/charater-list/:id"
+        render={props => <CharacterCard {...props} />}
+      />
     </main>
   );
 }
