@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, Route } from "react-router-dom";
-import CharacterCard from "./CharacterCard";
-import Character from "./Character";
-import SearchForm from "./SearchForm";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, Route } from 'react-router-dom';
+import CharacterCard from './CharacterCard';
+import Character from './Character';
+import SearchForm from './SearchForm';
 
 function CharacterList(props) {
   const [characters, setCharacters] = useState([]);
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
@@ -24,7 +24,7 @@ function CharacterList(props) {
           setCharacters(resultsData);
         })
         .catch(error => {
-          console.log("Server Error", error);
+          console.log('Server Error', error);
         });
     };
 
@@ -35,13 +35,28 @@ function CharacterList(props) {
     setSearchTerm(event.target.value);
   };
 
+  //   .container{
+  //     display:flex;
+  //     flex-wrap:wrap;
+  //     justify-content:center;
+  //     gap:10px//optional
+  //  }
 
+  //  .item{
+  //     flex-basis:30%; // will try to fill 30% of the parents width
+  //  }
   return (
     <div>
-      <h2>Characters</h2>
       <SearchForm handleChange={handleChange} searchTerm={searchTerm} />
-      <section className="character-list">
-       
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '10px',
+        }}
+        className='character-list'
+      >
         {characters.map(character => (
           <Link key={character.id} to={`/character-list/${character.id}`}>
             <CharacterCard
@@ -51,7 +66,7 @@ function CharacterList(props) {
             />
           </Link>
         ))}
-      </section>
+      </div>
     </div>
   );
 }
